@@ -1,13 +1,14 @@
-plugins {
-    id 'com.android.application'
-}
+//plugins {
+//    id 'com.android.application'
+//}
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
     buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
 
     defaultConfig {
-        applicationId rootProject.ext.versions["applicationId"]
+        applicationId rootProject.ext.versions["commonId"]
         minSdkVersion rootProject.ext.versions["minSdkVersion"]
         targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
         versionCode rootProject.ext.versions["versionCode"]
@@ -30,8 +31,6 @@ android {
 
 dependencies {
 
-//    implementation 'androidx.appcompat:appcompat:1.1.0'
-//    implementation 'com.google.android.material:material:1.1.0'
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
 }

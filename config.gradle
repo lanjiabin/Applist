@@ -5,6 +5,8 @@ ext {
 
     versions = [
             applicationId    : "com.android.applist",
+            commonId         : "com.android.commonId",
+
             minSdkVersion    : 29,
             targetSdkVersion : 29,
             compileSdkVersion: 29,
