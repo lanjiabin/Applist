@@ -1,5 +1,7 @@
-plugins {
-    id 'com.android.application'
+if (rootProject.ext.isWeatherApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 
 android {
@@ -7,7 +9,9 @@ android {
     buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
 
     defaultConfig {
-        applicationId rootProject.ext.versions["applicationId"]
+        if (rootProject.ext.isWeatherApplication) {
+            applicationId rootProject.ext.versions["weatherId"]
+        }
         minSdkVersion rootProject.ext.versions["minSdkVersion"]
         targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
         versionCode rootProject.ext.versions["versionCode"]
@@ -26,17 +30,28 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.isWeatherApplication) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'AndroidManifest.xml'
+
+                //library模式下，排除java/debug文件夹下的所有文件
+                java {
+                    exclude '*module'
+                }
+            }
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 
 dependencies {
-
-//    implementation 'androidx.appcompat:appcompat:1.1.0'
-//    implementation 'com.google.android.material:material:1.1.0'
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["constraintlayout"]
     implementation project(":common")
-
-    if (!rootProject.ext.isWeatherApplication){
-        implementation project(":weather")
-    }
 }
