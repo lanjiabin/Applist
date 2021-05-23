@@ -5,7 +5,7 @@ ext {
      * false 作为一个 library 存在
      * */
     isWeatherApplication = false
-    isSmsApplication = true
+    isSmsApplication = false
 
     versions = [
             applicationId    : "com.android.applist",
@@ -16,7 +16,7 @@ ext {
             minSdkVersion    : 29,
             targetSdkVersion : 29,
             compileSdkVersion: 29,
-            buildToolsVersion: "29.0.0",
+            buildToolsVersion: "29.0.2",
             versionCode      : 1,
             versionName      : "1.0",
 
@@ -28,7 +28,7 @@ ext {
             test_ext_junit   : "1.1.1",
             test_espresso    : "3.2.0",
 
-            arouter_api      : "1.4.0",
+            arouter_api      : "1.5.1",
             arouter_compiler : "1.2.1"
     ]
 

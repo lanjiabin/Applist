@@ -76,6 +76,6 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["test_ext_junit"]
     androidTestImplementation rootProject.ext.dependencies["test_espresso"]
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     implementation project(":common")
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
 }

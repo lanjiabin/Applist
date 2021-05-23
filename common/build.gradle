@@ -15,6 +15,11 @@ android {
         versionName rootProject.ext.versions["versionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -35,5 +40,4 @@ dependencies {
     implementation rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["arouter_api"]
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
-    //业务组件、业务基础组件 共同依赖的库（网络库、图片库等）都写在这里~
 }
