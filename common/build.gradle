@@ -33,4 +33,7 @@ dependencies {
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
+    api rootProject.ext.dependencies["arouter_api"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+    //业务组件、业务基础组件 共同依赖的库（网络库、图片库等）都写在这里~
 }

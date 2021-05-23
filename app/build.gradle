@@ -39,4 +39,9 @@ dependencies {
     if (!rootProject.ext.isWeatherApplication){
         implementation project(":weather")
     }
+
+    if (!rootProject.ext.isSmsApplication){
+        implementation project(":sms")
+    }
+
 }

@@ -18,6 +18,12 @@ android {
         versionName rootProject.ext.versions["versionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -70,4 +76,6 @@ dependencies {
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["test_ext_junit"]
     androidTestImplementation rootProject.ext.dependencies["test_espresso"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+    implementation project(":common")
 }
