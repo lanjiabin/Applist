@@ -34,9 +34,11 @@ android {
     sourceSets {
         main {
             if (rootProject.ext.isWeatherApplication) {
+                //application单独调试
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             } else {
-                manifest.srcFile 'AndroidManifest.xml'
+                //作为library集成
+                manifest.srcFile 'release/AndroidManifest.xml'
 
                 //library模式下，排除java/debug文件夹下的所有文件
                 java {
@@ -46,6 +48,19 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    /**
+     * 限定所有子类xml中的资源文件的前缀
+     * 注意：图片资源，限定失效，需要手动添加前缀
+     * */
+    subprojects {
+        afterEvaluate {
+            android {
+                resourcePrefix "${project.name}_"
+            }
+        }
+    }
+
 
 }
 
