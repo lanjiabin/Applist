@@ -6,12 +6,14 @@ ext {
      * */
     isWeatherApplication = false
     isSmsApplication = false
+    isHomeApplication = false
 
     versions = [
             applicationId    : "com.android.applist",
             commonId         : "com.android.commonId",
             weatherId        : "com.android.weather",
             smsId            : "com.android.sms",
+            homeId            : "com.android.home",
 
             minSdkVersion    : 29,
             targetSdkVersion : 29,

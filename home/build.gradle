@@ -1,0 +1,79 @@
+if (rootProject.ext.isHomeApplication) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+
+    defaultConfig {
+        if (rootProject.ext.isHomeApplication) {
+            applicationId rootProject.ext.versions["homeId"]
+        }
+        minSdkVersion rootProject.ext.versions["minSdkVersion"]
+        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
+        versionCode rootProject.ext.versions["versionCode"]
+        versionName rootProject.ext.versions["versionName"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            if (rootProject.ext.isWeatherApplication) {
+                //application单独调试
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                //作为library集成
+                manifest.srcFile 'release/AndroidManifest.xml'
+
+                //library模式下，排除java/debug文件夹下的所有文件
+                java {
+                    exclude '*module'
+                }
+            }
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    /**
+     * 限定所有子类xml中的资源文件的前缀
+     * 注意：图片资源，限定失效，需要手动添加前缀
+     * */
+    subprojects {
+        afterEvaluate {
+            android {
+                resourcePrefix "${project.name}_"
+            }
+        }
+    }
+
+
+}
+
+dependencies {
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["constraintlayout"]
+    implementation project(":common")
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+}
