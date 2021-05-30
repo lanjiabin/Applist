@@ -37,26 +37,27 @@ public class HomeActivity extends AppCompatActivity {
         mGoWeatherBtn.setOnClickListener(v -> {
             ARouter.getInstance()
                     .build("/weather/WeatherActivity")
-                    .withString("key1", "我是"+this.getPackageName()+"发出的信息").navigation();
+                    .withString("key1", "我是" + this.getPackageName() + "发出的信息").navigation();
         });
-
-        //获取信息
-        mGetMsgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<String> list = service.getSmsInfoList();
-                for (String msg : list) {
-                    LogUtil.d(TAG, "msg=" + msg);
+        if (service != null) {
+            //获取信息
+            mGetMsgBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> list = service.getSmsInfoList();
+                    for (String msg : list) {
+                        LogUtil.d(TAG, "msg=" + msg);
+                    }
                 }
-            }
-        });
+            });
 
-        //发送信息
-        mSentMsgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                service.setSmsToOne("17776106013", "小老弟，在不在？");
-            }
-        });
+            //发送信息
+            mSentMsgBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    service.setSmsToOne("17776106013", "小老弟，在不在？");
+                }
+            });
+        }
     }
 }
